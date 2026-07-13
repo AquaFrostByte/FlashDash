@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ url_for('static', filename='img/Arow.gif') }}" rel="icon" type="image/x-icon"/>
+    </head>
+    <body>
+        <canvas id="matrix"></canvas>
+        <!-- Sidebar -->
+        <div id="Side">
+            <button id="Menu" class="menuButton" onclick="openMenu()">
+                <img src="/static/icons/menu.png" class="menuIcon"
+                     onerror="this.parentElement.innerHTML='☰'">
+            </button>
+            <ul id="Sidebar">
+                <button class="SideButton SideItem"> Downloader </button>
+                <button class="SideButton SideItem"> Settings </button>
+                <button class="SideButton SideItem"> Repositories </button>
+            </ul>
+            <div id="NavClock"></div>
+        </div>
+
+        <!-- Main Window -->
+        <div id="Main">
+            <div id="MainWindow">
+                <div class="window-header" id="window-header">
+                    <span id="MainWindowTitle">FlashDash</span>
+                </div>
+                <div class="window-content">
+                    <h1>Downloader</h1>
+                    <form method="POST">
+                        <input type="text" name="download_link" placeholder="Past Download link here" autofocus id="Downloadlink">
+                    </form>
+                    <pre> {{ output }} </pre>
+                    <p id="download list"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animated background -->
+        
+
+        <script src="{{ url_for('static', filename='js/bg.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/menu.js')}}"></script>
+    </body>
+</html>
