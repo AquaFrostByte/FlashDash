@@ -25,6 +25,9 @@ function draw() {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   ctx.fillStyle = accentColor;
   ctx.font = fontSize + 'px monospace';
 
@@ -36,6 +39,11 @@ function draw() {
     ctx.fillText(text, x, y);
 
     if (y > canvas.height && Math.random() > 0.975) {
+
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(x, 0, fontSize, canvas.height);
+
+      ctx.fillStyle = accentColor;
       drops[i] = 0;
     }
     drops[i]++;

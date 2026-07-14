@@ -4,6 +4,12 @@
   initial-value: 0deg;
 }
 
+@property --beam-pos {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: -20%;
+}
+
 :root {
     --color-bg: #000;
     --color-border: #74d9f5c1;
@@ -240,6 +246,13 @@ canvas {
     margin: 0;
 }
 
+.window-content h1 {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    
+    border-bottom: var(--color-accent) 2px solid;
+}
+
 #Downloadlink {
     width: calc(100% - 8px);
     height: 24px;
@@ -270,6 +283,98 @@ canvas {
     border-bottom-color: var(--color-accent);
 }
 
+#Downloadpath {
+    width: calc(100% - 8px);
+    height: 24px;
+    
+    border: 2px solid transparent;
+
+    background-image: 
+      linear-gradient(#000000, #000), 
+      conic-gradient(
+        from var(--beam-deg),
+        #ffffff 0deg,
+        var(--color-accent) 30deg,
+        var(--color-accent) 330deg,
+        #ffffff 360deg
+      );
+    
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    animation: spinBeam 3s linear infinite; 
+
+    background-color: #000;
+}
+
+#Downloadpath:focus,
+#Downloadpath:focus-visible {
+    outline: none;
+    border-bottom-color: var(--color-accent);
+}
+
+#forms {
+    margin-top: 6px;
+}
+
+#quickoptions {
+    margin-top: 6px;
+
+    display: flex;
+    align-items: left;
+    gap: 6px;
+}
+
+#quickoptions button {
+    width: 180px;
+    height: 40px;
+
+    background-color: #000;
+    color: #fff;
+
+    border: 2px solid;
+    
+    border-image: linear-gradient(
+        to right, 
+        var(--color-accent) 0%, 
+        var(--color-accent) var(--beam-pos, -20%), 
+        #ffffff calc(var(--beam-pos, -20%) + 10%), 
+        var(--color-accent) calc(var(--beam-pos, -20%) + 20%), 
+        var(--color-accent) 100%
+    ) 1;
+
+    animation: moveBeam 2s linear infinite;
+}
+
+#download-list table {
+    width: 100%;
+}
+
+input[type="text"], input::placeholder {
+    color: #ffffff !important;
+}
+
+input[type="text"]:focus {
+    color: #ffffff !important;
+    border-color: #000000 !important;
+}
+
+.th-head {
+    text-align: left !important;
+}
+
+.status-bage.error {
+    background-color: #d11a2a;
+    color: white;
+}
+
+.error-text {
+    font-size: 0.8rem;
+    color: #ff6b6b;
+    margin-top: 4px;
+    display: block;
+}
+
 @keyframes growAndMove {
     0%, 100% {
         transform: translateY(-10vh);
@@ -286,4 +391,13 @@ canvas {
   100% {
     --beam-deg: 360deg;
   }
+}
+
+@keyframes moveBeam {
+    0% {
+        --beam-pos: -20%;
+    }
+    100% {
+        --beam-pos: 100%;
+    }
 }

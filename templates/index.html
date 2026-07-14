@@ -28,11 +28,39 @@
                 </div>
                 <div class="window-content">
                     <h1>Downloader</h1>
-                    <form method="POST">
+                    <form id="forms" method="POST">
                         <input type="text" name="download_link" placeholder="Past Download link here" autofocus id="Downloadlink">
                     </form>
+                    <form id="forms" method="POST">
+                        <input type="text" name="download_path" placeholder="Download Path" id="Downloadpath">
+                    </form>
+                    <div id="quickoptions">
+                        <button id="purge-btn"> Clear </button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                    </div>
                     <pre> {{ output }} </pre>
-                    <p id="download list"></p>
+                    <div id="download-list">
+                        <table role="grid">
+                            <thead>
+                                <tr>
+                                    <th class="th-head">File Name</th>
+                                    <th class="th-head">Status</th>
+                                    <th class="th-head">Progress</th>
+                                    <th class="th-head">Speed</th>
+                                    <th class="th-head">Size</th>
+                                    <th class="th-head">ETA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="download-tbody">
+                                <tr>
+                                    <td colspan="6" style="text-align: center;">Awaiting status :3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,6 +69,7 @@
         
 
         <script src="{{ url_for('static', filename='js/bg.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/downloadmanager.js')}}"></script>
         <script src="{{ url_for('static', filename='js/menu.js')}}"></script>
     </body>
 </html>

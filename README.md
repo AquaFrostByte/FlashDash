@@ -26,3 +26,14 @@ Its manly used or expected to be hosted on Linux. In my case Debian 15. It shoul
 
 Alot of material that was i had before is made by me already for a nother project.
 this includes the background that is hard to see. I can recommend using because its pretty light on recourses and looks good atleast i think that :3
+
+## Installation
+
+### Aria as a downlaod engin
+
+Download aria2c via ur package manager. 
+Then enable rpc.
+
+```bash
+aria2c --enable-rpc
+```
