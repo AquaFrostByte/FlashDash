@@ -4,7 +4,6 @@ async function refreshDashboard() {
         if (!response.ok) throw new Error("Could not reach API");
         const downloads = await response.json();
 
-        // Check for both selector formats safely
         const tbody = document.getElementById('downloads-table-body') || document.getElementById('download-tbody');
         if (!tbody) return;
         
@@ -52,7 +51,6 @@ async function refreshDashboard() {
     }
 }
 
-// Clear Completed & Failed tasks button
 const purgeBtn = document.getElementById('purge-btn');
 if (purgeBtn) {
     purgeBtn.addEventListener('click', async () => {
@@ -74,11 +72,57 @@ if (purgeBtn) {
             alert("Failed to connect to server: " + err.message);
         } finally {
             purgeBtn.innerText = originalText;
-            purgeBtn.disabled = false; // Fixed typo "fasle" -> "false"
+            purgeBtn.disabled = false; 
         }
     });
 }
 
-// Refresh every 2 seconds
+document.getElementById('Downloadlink').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+
+        const downloadLink = this.value.trim(); 
+        const downloadPath = document.getElementById('Downloadpath').value.trim();
+        const statuspre = document.getElementById('status');
+
+        statuspre.style.display = 'block';
+
+        if (!downloadLink) {
+            alert('Add a download link! 3:<');
+            return;
+        }
+
+        const requestBody = {
+            download_link: downloadLink
+        };
+
+        if (downloadPath) {
+            requestBody.download_path = downloadPath;
+        }
+
+        fetch('/api/add-download', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody) 
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Download started!:', data.gid);
+                this.value = ''; 
+
+                document.getElementById('Downloadpath').value = ''; 
+                alert('Download started!');
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to send request.'); 
+        });
+    }
+});
+
 setInterval(refreshDashboard, 2000);
 refreshDashboard();

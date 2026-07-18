@@ -13,8 +13,8 @@
                      onerror="this.parentElement.innerHTML='☰'">
             </button>
             <ul id="Sidebar">
-                <button class="SideButton SideItem"> Downloader </button>
-                <button class="SideButton SideItem"> Settings </button>
+                <button class="SideButton SideItem" onclick="window.location.href='/';"> Downloader </button>
+                <button class="SideButton SideItem" onclick="window.location.href='/settings';"> Settings </button>
                 <button class="SideButton SideItem"> Repositories </button>
             </ul>
             <div id="NavClock"></div>
@@ -27,13 +27,11 @@
                     <span id="MainWindowTitle">FlashDash</span>
                 </div>
                 <div class="window-content">
-                    <h1>Downloader</h1>
-                    <form id="forms" method="POST">
+                    <h1> <img src="{{url_for('static', filename='img/Arow.gif')}}" id="icon"> Downloader</h1>
+                    <div id="forms">
                         <input type="text" name="download_link" placeholder="Past Download link here" autofocus id="Downloadlink">
-                    </form>
-                    <form id="forms" method="POST">
-                        <input type="text" name="download_path" placeholder="Download Path" id="Downloadpath">
-                    </form>
+                        <input type="text" name="download_path" placeholder="Download Path :3" id="Downloadpath">
+                    </div>
                     <div id="quickoptions">
                         <button id="purge-btn"> Clear </button>
                         <button></button>
@@ -41,11 +39,11 @@
                         <button></button>
                         <button></button>
                     </div>
-                    <pre> {{ output }} </pre>
+                    <pre id="status" style="display: none;"> {{ output }} </pre>
                     <div id="download-list">
                         <table role="grid">
                             <thead>
-                                <tr>
+                                <tr id="headertr">
                                     <th class="th-head">File Name</th>
                                     <th class="th-head">Status</th>
                                     <th class="th-head">Progress</th>
@@ -67,9 +65,10 @@
 
         <!-- Animated background -->
         
-
+        <script src="{{ url_for('static', filename='js/init.js')}}"></script>
         <script src="{{ url_for('static', filename='js/bg.js')}}"></script>
         <script src="{{ url_for('static', filename='js/downloadmanager.js')}}"></script>
         <script src="{{ url_for('static', filename='js/menu.js')}}"></script>
+
     </body>
 </html>

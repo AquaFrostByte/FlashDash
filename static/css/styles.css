@@ -253,37 +253,7 @@ canvas {
     border-bottom: var(--color-accent) 2px solid;
 }
 
-#Downloadlink {
-    width: calc(100% - 8px);
-    height: 24px;
-    
-    border: 2px solid transparent;
-
-    background-image: 
-      linear-gradient(#000, #000), 
-      conic-gradient(
-        from var(--beam-deg),
-        #ffffff 0deg,
-        var(--color-accent) 30deg,
-        var(--color-accent) 330deg,
-        #ffffff 360deg
-      );
-    
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-
-    animation: spinBeam 3s linear infinite; 
-
-    background-color: #000;
-}
-
-#Downloadlink:focus,
-#Downloadlink:focus-visible {
-    outline: none;
-    border-bottom-color: var(--color-accent);
-}
-
-#Downloadpath {
+input {
     width: calc(100% - 8px);
     height: 24px;
     
@@ -307,8 +277,8 @@ canvas {
     background-color: #000;
 }
 
-#Downloadpath:focus,
-#Downloadpath:focus-visible {
+input:focus,
+input:focus-visible {
     outline: none;
     border-bottom-color: var(--color-accent);
 }
@@ -346,6 +316,10 @@ canvas {
     animation: moveBeam 2s linear infinite;
 }
 
+#Downloadlink {
+    margin-bottom: 4px;
+}
+
 #download-list table {
     width: 100%;
 }
@@ -373,6 +347,23 @@ input[type="text"]:focus {
     color: #ff6b6b;
     margin-top: 4px;
     display: block;
+}
+
+#icon {
+    height: 30px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#headertr {
+    border-bottom: var(--color-border) 1px solid;
+}
+
+tr > *:first-child {
+    border-left: var(--color-accent) 2px solid;
 }
 
 @keyframes growAndMove {

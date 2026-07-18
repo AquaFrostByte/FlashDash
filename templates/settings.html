@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ url_for('static', filename='img/Arow.gif') }}" rel="icon" type="image/x-icon"/>
+    </head>
+    <body>
+        <canvas id="matrix"></canvas>
+        <!-- Sidebar -->
+        <div id="Side">
+            <button id="Menu" class="menuButton" onclick="openMenu()">
+                <img src="/static/icons/menu.png" class="menuIcon"
+                     onerror="this.parentElement.innerHTML='☰'">
+            </button>
+            <ul id="Sidebar">
+                <button class="SideButton SideItem" onclick="window.location.href='/';"> Downloader </button>
+                <button class="SideButton SideItem" onclick="window.location.href='/settings';"> Settings </button>
+                <button class="SideButton SideItem"> Repositories </button>
+            </ul>
+            <div id="NavClock"></div>
+        </div>
+
+        <!-- Main Window -->
+        <div id="Main">
+            <div id="MainWindow">
+                <div class="window-header" id="window-header">
+                    <span id="MainWindowTitle">FlashDash</span>
+                </div>
+                <div class="window-content">
+                    <h2>Default Download Path</h2>
+                    <div class="setting-item">
+                        <label for="defaultDownloadPath">Path:</label>
+                        <input type="text" id="defaultDownloadPath" placeholder="/path/to/downloads">
+                        <button id="saveDefaultPathBtn">Save</button>
+                    </div>
+                    <div class="setting-item">
+                        <div id="forms">
+                            <label for="themeToggle">Theme:</label>
+                            <select id="themeToggle">
+                                <option value="dark">Dark Mode</option>
+                                <option value="light">White Mode</option>
+                            </select>
+                        </div>
+                        <div id="forms">
+                            <label for="accentPicker">Accent Color:</label>
+                            <input type="color" id="accentPicker" value="#56a6db">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animated background -->
+        <script src="{{ url_for('static', filename='js/settings.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/bg.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/downloadmanager.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/menu.js')}}"></script>
+
+    </body>
+</html>
