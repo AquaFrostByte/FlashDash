@@ -37,3 +37,7 @@ Then enable rpc.
 ```bash
 aria2c --enable-rpc
 ```
+
+### Bugs
+
+A know bug i dont know how or where i have to fix is that in the "white mode" The background stayes black even tho is set the --color-bg variabke to white.

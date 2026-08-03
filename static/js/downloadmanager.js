@@ -77,6 +77,32 @@ if (purgeBtn) {
     });
 }
 
+const resumeBtn = document.getElementById('resume-btn');
+if (resumeBtn) {
+    resumeBtn.addEventListener('click', async () => {
+        const originalText = resumeBtn.innerText;
+
+        resumeBtn.innerText = "Continuing! :3";
+        resumeBtn.disabled = true;
+
+        try {
+            const response = await fetch('/api/resume', { method: 'POST' });
+            const result = await response.json();
+
+            if (response.ok) {
+                await refreshDashboard();
+            } else {
+                alert("Error: " + (result.error || "Unknown error"));
+            }
+        } catch (err) {
+            alert("Failed to connect to server: " + err.message);
+        } finally {
+            resumeBtn.innerText = originalText;
+            resumeBtn.disabled = false;
+        }
+    });
+}
+
 document.getElementById('Downloadlink').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         event.preventDefault();

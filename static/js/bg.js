@@ -5,6 +5,12 @@ const accentColor = getComputedStyle(document.documentElement)
   .getPropertyValue('--color-accent')
   .trim();
 
+const bgColor = getComputedStyle(document.documentElement)
+  .getPropertyValue('--color-bg')
+  .trim();
+
+console.log(bgColor)
+
 function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -22,12 +28,19 @@ let columns = Math.floor(canvas.width / fontSize);
 let drops = new Array(columns).fill(1);
 
 function draw() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if(bgColor  == "#000000"){
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.01)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  } else {
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.01)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
   ctx.fillStyle = accentColor;
   ctx.font = fontSize + 'px monospace';
 
@@ -40,7 +53,7 @@ function draw() {
 
     if (y > canvas.height && Math.random() > 0.975) {
 
-      ctx.fillStyle = '#000000';
+      ctx.fillStyle = bgColor;
       ctx.fillRect(x, 0, fontSize, canvas.height);
 
       ctx.fillStyle = accentColor;

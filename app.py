@@ -133,6 +133,26 @@ def purge_downloads():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/pause', methods=["POST"])
+def pause():
+    if not api:
+        return jsonify({"error": "aria2c daemon is offline"}), 503
+    try:
+        api.pause_all()
+        return jsonify({"success": True, "message": "STOP! all possed :3!"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/resume', methods=["POST"])
+def resume():
+    if not api:
+        return jsonify({"error": "aria2c daemon is offline"}), 503
+    try:
+        api.resume_all()
+        return jsonify({"success": True, "message": "Everything Resumed"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 @app.route('/api/settings', methods=['GET','POST'])
 def handle_settings():
     if request.method == 'GET':

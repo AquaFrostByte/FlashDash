@@ -1,0 +1,100 @@
+@property --beam-deg {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --beam-pos {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: -20%;
+}
+
+:root {
+    --color-bg: #000;
+    --color-border: #74d9f5c1;
+    --color-text: #fff;
+    --color-text-muted: #dfdfdf;
+    --color-accent: #56a6bd;
+
+    --color-bevel-shadow-1: #373737;
+    --color-bevel-shadow-2: #1a1a1a;
+    --color-active-shadow-1: rgb(109, 109, 109);
+    --color-active-shadow-2: #9c9c9c;
+    --color-active-bg: #0a0a0a;
+
+    --color-line-glow: rgba(255, 255, 255, 0.55);
+}
+
+#saveDefaultPathBtn {
+    margin-top: 8px;
+    width: 120px;
+    height: 40px;
+
+    color: var(--color-text);
+    background-color: var(--color-bg);
+
+    border: 2px solid transparent;
+
+    background-image: 
+      linear-gradient(var(--color-bg), var(--color-bg)), 
+      conic-gradient(
+        from var(--beam-deg),
+        #ffffff 0deg,
+        var(--color-accent) 30deg,
+        var(--color-accent) 330deg,
+        #ffffff 360deg
+      );
+    
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    animation: spinBeam 3s linear infinite;     
+}
+
+#themeToggle {
+    background: var(--color-bg);
+    color: var(--color-text);
+
+    border: var(--color-border) 2px solid;
+}
+
+label {
+    font-size: 20px;
+}
+
+select {
+    width: 120px;
+}
+
+#accentPicker {
+    width: 120px;
+    height: 50px;
+}
+
+@keyframes growAndMove {
+    0%, 100% {
+        transform: translateY(-10vh);
+    }
+    50% {
+        transform: translateY(10vh);
+    }
+}
+
+@keyframes spinBeam {
+  0% {
+    --beam-deg: 0deg;
+  }
+  100% {
+    --beam-deg: 360deg;
+  }
+}
+
+@keyframes moveBeam {
+    0% {
+        --beam-pos: -20%;
+    }
+    100% {
+        --beam-pos: 100%;
+    }
+}
