@@ -35,7 +35,7 @@ Download aria2c via ur package manager.
 Then enable rpc.
 
 ```bash
-aria2c --enable-rpc
+aria2c --enable-rpc --rpc-listen-all=true -D
 ```
 
 ### Setting up the .env

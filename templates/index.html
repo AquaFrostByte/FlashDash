@@ -6,7 +6,6 @@
     </head>
     <body>
         <canvas id="matrix"></canvas>
-        <!-- Sidebar -->
         <div id="Side">
             <button id="Menu" class="menuButton" onclick="openMenu()">
                 <img src="/static/icons/menu.png" class="menuIcon"
@@ -20,7 +19,6 @@
             <div id="NavClock"></div>
         </div>
 
-        <!-- Main Window -->
         <div id="Main">
             <div id="MainWindow">
                 <div class="window-header" id="window-header">
@@ -62,13 +60,12 @@
                 </div>
             </div>
         </div>
-
-        <!-- Animated background -->
         
         <script src="{{ url_for('static', filename='js/init.js')}}"></script>
         <script src="{{ url_for('static', filename='js/bg.js')}}"></script>
         <script src="{{ url_for('static', filename='js/downloadmanager.js')}}"></script>
         <script src="{{ url_for('static', filename='js/menu.js')}}"></script>
         <script src="{{ url_for('static', filename='js/pause.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/resume.js')}}"></script>
     </body>
 </html>

@@ -142,6 +142,24 @@ def pause():
         return jsonify({"success": True, "message": "STOP! all possed :3!"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/api/pause-single', methods=["POST"])
+def pause_single():
+    if not api:
+        return jsonify({"error": "aria2c daemon is offline"}), 503
+        
+    data = request.get_json() or {}
+    gid = data.get('gid')
+    
+    if not gid:
+        return jsonify({"error": "GID is required"}), 400
+        
+    try:
+        download = api.get_download(gid)
+        download.pause()
+        return jsonify({"success": True, "message": f"Paused download {gid}!"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/api/resume', methods=["POST"])
 def resume():
@@ -150,6 +168,24 @@ def resume():
     try:
         api.resume_all()
         return jsonify({"success": True, "message": "Everything Resumed"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+@app.route('/api/resume-single', methods=["POST"])
+def resume_single():
+    if not api:
+        return jsonify({"error": "aria2c daemon is offline"}), 503
+        
+    data = request.get_json() or {}
+    gid = data.get('gid')
+    
+    if not gid:
+        return jsonify({"error": "GID is required"}), 400
+        
+    try:
+        download = api.get_download(gid)
+        download.resume()
+        return jsonify({"success": True, "message": f"Resumed download {gid}!"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

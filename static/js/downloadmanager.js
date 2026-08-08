@@ -16,8 +16,10 @@ async function refreshDashboard() {
 
         downloads.forEach(task => {
             const row = document.createElement('tr');
+            
+            row.dataset.gid = task.gid; 
+            row.style.transition = "background-color 0.2s"; 
 
-            // Handle potential errors beautifully
             const isError = task.status.toLowerCase() === 'error';
             const errorNotice = isError && task.error_message
                 ? `<br><span class="error-text" style="color: #ff6b6b; font-size: 0.85rem;">⚠️ Error ${task.error_code}: ${task.error_message}</span>`
@@ -55,14 +57,12 @@ const purgeBtn = document.getElementById('purge-btn');
 if (purgeBtn) {
     purgeBtn.addEventListener('click', async () => {
         const originalText = purgeBtn.innerText;
-
         purgeBtn.innerText = "Killing it all! >:3";
         purgeBtn.disabled = true;
 
         try {
             const response = await fetch('/api/purge', { method: 'POST' });
             const result = await response.json();
-
             if (response.ok) {
                 await refreshDashboard();
             } else {
@@ -77,32 +77,6 @@ if (purgeBtn) {
     });
 }
 
-const resumeBtn = document.getElementById('resume-btn');
-if (resumeBtn) {
-    resumeBtn.addEventListener('click', async () => {
-        const originalText = resumeBtn.innerText;
-
-        resumeBtn.innerText = "Continuing! :3";
-        resumeBtn.disabled = true;
-
-        try {
-            const response = await fetch('/api/resume', { method: 'POST' });
-            const result = await response.json();
-
-            if (response.ok) {
-                await refreshDashboard();
-            } else {
-                alert("Error: " + (result.error || "Unknown error"));
-            }
-        } catch (err) {
-            alert("Failed to connect to server: " + err.message);
-        } finally {
-            resumeBtn.innerText = originalText;
-            resumeBtn.disabled = false;
-        }
-    });
-}
-
 document.getElementById('Downloadlink').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
@@ -110,21 +84,15 @@ document.getElementById('Downloadlink').addEventListener('keydown', function(eve
         const downloadLink = this.value.trim(); 
         const downloadPath = document.getElementById('Downloadpath').value.trim();
         const statuspre = document.getElementById('status');
-
-        statuspre.style.display = 'block';
+        if (statuspre) statuspre.style.display = 'block';
 
         if (!downloadLink) {
             alert('Add a download link! 3:<');
             return;
         }
 
-        const requestBody = {
-            download_link: downloadLink
-        };
-
-        if (downloadPath) {
-            requestBody.download_path = downloadPath;
-        }
+        const requestBody = { download_link: downloadLink };
+        if (downloadPath) requestBody.download_path = downloadPath;
 
         fetch('/api/add-download', {
             method: 'POST',
@@ -136,9 +104,9 @@ document.getElementById('Downloadlink').addEventListener('keydown', function(eve
             if (data.success) {
                 console.log('Download started!:', data.gid);
                 this.value = ''; 
-
                 document.getElementById('Downloadpath').value = ''; 
                 alert('Download started!');
+                refreshDashboard(); 
             } else {
                 alert('Error: ' + data.error);
             }
