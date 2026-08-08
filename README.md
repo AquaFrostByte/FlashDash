@@ -3,7 +3,7 @@
 First of all i dont condone piracy and this program shound not be used for piracy!!
 Where u get the download resources from is not my problem and i want add any resources where to get the downlaod repositris from!
 
-What is flash dash? 
+## What is flash dash? 
 
 Flash dash is a way to easly download and manage thos downloads on a remote server!
 So a download manager just for ur Server? Something like aria? 
@@ -38,6 +38,20 @@ Then enable rpc.
 aria2c --enable-rpc
 ```
 
-### Bugs
+### Setting up the .env
+
+I cant push my own .env file because I secured my aria server with a Password and u should too! 
+
+so the .env should enclude the following 
+
+```text
+ARIA2_RPC_SECRET=UrPassword
+ARIA2_RPC_HOST=http://localhost
+ARIA2_RPC_PORT=6800
+```
+
+Technicly u only need to chnage the password but if u use a diffrent server then the one Flash dash is running on u can also change that.
+
+## Bugs
 
 A know bug i dont know how or where i have to fix is that in the "white mode" The background stayes black even tho is set the --color-bg variabke to white.
