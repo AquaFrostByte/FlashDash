@@ -94,6 +94,11 @@ document.getElementById('Downloadlink').addEventListener('keydown', function(eve
         const requestBody = { download_link: downloadLink };
         if (downloadPath) requestBody.download_path = downloadPath;
 
+        const currentSplit = window.splitManager ? window.splitManager.getActiveSplit() : null;
+        if (currentSplit) {
+            requestBody.split = currentSplit;
+        }
+
         fetch('/api/add-download', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -105,7 +110,11 @@ document.getElementById('Downloadlink').addEventListener('keydown', function(eve
                 console.log('Download started!:', data.gid);
                 this.value = ''; 
                 document.getElementById('Downloadpath').value = ''; 
-                alert('Download started!');
+                //alert('Download started!');
+                if (window.splitManager) {
+                    window.splitManager.resetSplit();
+                }
+                
                 refreshDashboard(); 
             } else {
                 alert('Error: ' + data.error);

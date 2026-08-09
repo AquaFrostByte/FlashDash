@@ -34,8 +34,8 @@
                         <button id="purge-btn"> Clear </button>
                         <button id="pause-btn"> Pause </button>
                         <button id="resume-btn"> Resume </button>
-                        <button></button>
-                        <button></button>
+                        <button id="split8-btn"> Split 8 </button>
+                        <button id="split16-btn"> Split 16 </button>
                     </div>
                     <pre id="status" style="display: none;"> {{ output }} </pre>
                     <div id="download-list">
@@ -67,5 +67,6 @@
         <script src="{{ url_for('static', filename='js/menu.js')}}"></script>
         <script src="{{ url_for('static', filename='js/pause.js')}}"></script>
         <script src="{{ url_for('static', filename='js/resume.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/split.js')}}"></script>
     </body>
 </html>

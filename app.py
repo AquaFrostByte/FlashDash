@@ -103,6 +103,7 @@ def add_download():
     data = request.get_json() or {}
     download_link = data.get('download_link')
     download_path = data.get('download_path')
+    split_value = data.get('split')
 
     if not download_link:
         return jsonify({"error": "Download link is required"}), 400
@@ -115,6 +116,10 @@ def add_download():
         default_path = config.get('default_download_path')
         if default_path:
             options['dir'] = os.path.abspath(default_path)
+
+    if split_value in [8, 16]:
+        options['split'] = str(split_value)
+        options['max-connection-per-server'] = str(split_value)
 
     try:
         download = api.add_uris([download_link], options=options)

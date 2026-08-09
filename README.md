@@ -52,6 +52,11 @@ ARIA2_RPC_PORT=6800
 
 Technicly u only need to chnage the password but if u use a diffrent server then the one Flash dash is running on u can also change that.
 
+## Settings
+
+Changing the default download Dir has to be saved!
+For the rest a reload is enought.
+
 ## Bugs
 
 A know bug i dont know how or where i have to fix is that in the "white mode" The background stayes black even tho is set the --color-bg variabke to white.
