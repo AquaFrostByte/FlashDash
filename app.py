@@ -3,6 +3,7 @@ import subprocess
 import aria2p
 import os
 import json
+import requests
 from dotenv import load_dotenv
 
 app = Flask(__name__)
@@ -23,11 +24,14 @@ def load_config():
     if os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, 'r') as f:
-                return json.load(f)
+                config = json.load(f)
+                if 'repositories' not in config:
+                    config['repositories'] = []
+                return config
         except json.JSONDecodeError:
             print(f"Uhmm Json is broken 3: ")
         
-    return {"default_download_path":""}
+    return {"default_download_path": "", "repositories": []}
 
 def save_config(config):
     with open(CONFIG_FILE, 'w') as f:
@@ -55,6 +59,10 @@ def settings():
         if link:
             output = download(link)
     return render_template('settings.html', output=output)
+
+@app.route('/repo', methods=["GET", "POST"])
+def repo():
+    return render_template('repo.html')
 
 @app.route('/api/downloads')
 def get_downloads():
@@ -208,6 +216,67 @@ def handle_settings():
         config['default_download_path'] = data['default_download_path']
         save_config(config)
         return jsonify({"success":True,"message":"Settings saved :3!"})
+
+@app.route('/api/repos', methods=['GET', 'POST', 'DELETE'])
+def handle_repos():
+    config = load_config()
+    
+    if request.method == 'GET':
+        return jsonify(config.get('repositories', []))
+        
+    elif request.method == 'POST':
+        data = request.get_json() or {}
+        repo_url = data.get('url', '').strip()
+        
+        if not repo_url:
+            return jsonify({"error": "URL is required"}), 400
+            
+        if repo_url not in config['repositories']:
+            config['repositories'].append(repo_url)
+            save_config(config)
+            
+        return jsonify({"success": True, "repositories": config['repositories']})
+        
+    elif request.method == 'DELETE':
+        data = request.get_json() or {}
+        repo_url = data.get('url')
+        
+        if repo_url in config['repositories']:
+            config['repositories'].remove(repo_url)
+            save_config(config)
+            
+        return jsonify({"success": True, "repositories": config['repositories']})
+        
+@app.route('/api/check-frame', methods=['GET'])
+def check_frame():
+    url = request.args.get('url')
+    if not url:
+        return jsonify({"error": "No URL provided"}), 400
+        
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+        
+        response = requests.head(url, headers=headers, allow_redirects=True, timeout=5)
+        
+        if response.status_code == 405:
+            response = requests.get(url, headers=headers, stream=True, timeout=5)
+            
+        res_headers = response.headers
+        x_frame_options = res_headers.get('X-Frame-Options', '').upper()
+        csp = res_headers.get('Content-Security-Policy', '').lower()
+        
+        can_frame = True
+
+        if 'DENY' in x_frame_options or 'SAMEORIGIN' in x_frame_options:
+            can_frame = False
+
+        if 'frame-ancestors' in csp:
+            can_frame = False
+            
+        return jsonify({"can_frame": can_frame})
+        
+    except requests.exceptions.RequestException:
+        return jsonify({"can_frame": False})
 
 if __name__ == '__main__':
     print("Server Started...")

@@ -1,3 +1,7 @@
 {
-    "default_download_path": "/mnt/PS2HDD/temp"
-}
+    "default_download_path": "/mnt/PS2HDD/Movies",
+    "repositories": [
+        "https://a.111477.xyz/",
+        "https://www.axekin.com/games",
+        "https://vimm.net/vault",
+      

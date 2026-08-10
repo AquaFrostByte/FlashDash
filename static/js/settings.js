@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const defaultDownloadPathInput = document.getElementById('defaultDownloadPath');
     const saveDefaultPathBtn = document.getElementById('saveDefaultPathBtn');
 
-                // Load current default path
     try {
         const response = await fetch('/api/settings');
         if (response.ok) {
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error fetching settings:', error);
     }
 
-                // Save default path
     saveDefaultPathBtn.addEventListener('click', async () => {
         const newPath = defaultDownloadPathInput.value.trim();
         try {

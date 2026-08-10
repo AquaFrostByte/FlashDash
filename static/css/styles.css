@@ -171,8 +171,6 @@ button {
     background-color: var(--color-active-bg) !important;
 }
 
-/* ── Main Window ─────────────────────────────────────────────────────── */
-
 #Main {
     position: fixed;
     top: 0;
@@ -200,7 +198,7 @@ button {
 
     z-index: 2;
 }
-/* Title bar */
+
 .window-header {
     height: 32px;
     padding: 6px 10px;
@@ -216,7 +214,6 @@ button {
     flex-shrink: 0;
 }
 
-/* Content area */
 .window-content {
     flex: 1;
     overflow: hidden;
@@ -226,15 +223,6 @@ button {
     margin-right: 8px;
 }
 
-/* ── Nav clock ───────────────────────────────────────────────────────── */
-#NavClock {
-    position: absolute;
-    right: 14px;
-    font-size: 13px;
-    color: var(--color-text-muted);
-}
-
-/* ── Background lines ────────────────────────────────────────────────── */
 canvas {
     position: fixed;
     top: 0;
@@ -283,8 +271,45 @@ input:focus-visible {
     border-bottom-color: var(--color-accent);
 }
 
-#forms {
-    margin-top: 6px;
+
+#links {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
+    height: 30px;
+    gap: 8px;
+
+    margin-bottom: 8px;
+}
+
+#Downloadlink {
+    height: 30px;
+}
+
+#links button {
+    width: 120px;
+    height: 36px;
+
+    background-color: var(--color-bg);
+    color: var(--color-text);
+
+    border: 2px solid;
+    
+    border-image: linear-gradient(
+        to right, 
+        var(--color-accent) 0%, 
+        var(--color-accent) var(--beam-pos, -20%), 
+        #ffffff calc(var(--beam-pos, -20%) + 10%), 
+        var(--color-accent) calc(var(--beam-pos, -20%) + 20%), 
+        var(--color-accent) 100%
+    ) 1;
+
+    animation: moveBeam 2s linear infinite;
+}
+
+#Downloadpath {
+    height: 30px;
 }
 
 #quickoptions {
@@ -314,10 +339,6 @@ input:focus-visible {
     ) 1;
 
     animation: moveBeam 2s linear infinite;
-}
-
-#Downloadlink {
-    margin-bottom: 4px;
 }
 
 #download-list table {

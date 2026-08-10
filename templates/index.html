@@ -14,7 +14,7 @@
             <ul id="Sidebar">
                 <button class="SideButton SideItem" onclick="window.location.href='/';"> Downloader </button>
                 <button class="SideButton SideItem" onclick="window.location.href='/settings';"> Settings </button>
-                <button class="SideButton SideItem"> Repositories </button>
+                <button class="SideButton SideItem" onclick="window.location.href='/repo';"> Repositories </button>
             </ul>
             <div id="NavClock"></div>
         </div>
@@ -27,7 +27,10 @@
                 <div class="window-content">
                     <h1> <img src="{{url_for('static', filename='img/Arow.gif')}}" id="icon"> Downloader</h1>
                     <div id="forms">
-                        <input type="text" name="download_link" placeholder="Past Download link here" autofocus id="Downloadlink">
+                        <div id="links">
+                        <input type="text" name="download_link" placeholder="Paste Download link here" autofocus id="Downloadlink">
+                        <button id="submit-download"> Add </button>
+                        </div>
                         <input type="text" name="download_path" placeholder="Download Path :3" id="Downloadpath">
                     </div>
                     <div id="quickoptions">

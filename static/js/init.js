@@ -8,7 +8,7 @@ async function loading() {
     if (boot === false) {
         if (mainWindow) {
             mainWindow.style.visibility = 'hidden';
-            await wait(2500);
+            await wait(100);
             mainWindow.style.visibility = 'visible';
         }
     }

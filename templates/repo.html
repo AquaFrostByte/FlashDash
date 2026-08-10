@@ -2,7 +2,7 @@
 <html>
     <head>
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ url_for('static', filename='css/settings.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ url_for('static', filename='css/repo.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ url_for('static', filename='img/Arow.gif') }}" rel="icon" type="image/x-icon"/>
     </head>
     <body>
@@ -19,40 +19,33 @@
             </ul>
             <div id="NavClock"></div>
         </div>
-
         <div id="Main">
             <div id="MainWindow">
                 <div class="window-header" id="window-header">
                     <span id="MainWindowTitle">FlashDash</span>
                 </div>
                 <div class="window-content">
-                    <h2>Default Download Path</h2>
-                    <div class="setting-item">
-                        <label for="defaultDownloadPath">Path:</label>
-                        <input type="text" id="defaultDownloadPath" placeholder="/path/to/downloads">
-                        <button id="saveDefaultPathBtn">Save</button>
-                    </div>
-                    <div class="setting-item">
-                        <div id="forms">
-                            <label for="themeToggle">Theme:</label><br><br>
-                            <select id="themeToggle">
-                                <option value="dark">Dark Mode</option>
-                                <option value="light">White Mode</option>
-                            </select>
+                    <div id="repo-manager">
+                        <div id="add-repo">
+                            <input id="repo-input" type="text" placeholder="Paste Repo Url here!">
+                            <button id="repo-submit"> Add </button>
                         </div>
-                        <div id="forms">
-                            <label for="accentPicker">Accent Color:</label><br><br>
-                            <input type="color" id="accentPicker" value="#56a6db">
-                        </div>
+                        <div id="repos"></div>
                     </div>
+                    <div id="repo-browser" style="display: none;">
+                        <div>
+                            <button onclick="closeBrowser()" id="backButton">⬅ Back to Repositories</button>
+                        </div>
+                        <iframe id="repo-iframe" src="about:blank"></iframe>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <script src="{{ url_for('static', filename='js/settings.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/init.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/repo.js')}}"></script>
         <script src="{{ url_for('static', filename='js/bg.js')}}"></script>
-        <script src="{{ url_for('static', filename='js/downloadmanager.js')}}"></script>
         <script src="{{ url_for('static', filename='js/menu.js')}}"></script>
-
     </body>
 </html>

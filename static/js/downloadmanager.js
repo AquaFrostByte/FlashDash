@@ -77,54 +77,69 @@ if (purgeBtn) {
     });
 }
 
+function submitDownload() {
+    const downloadLinkInput = document.getElementById('Downloadlink');
+    const downloadPathInput = document.getElementById('Downloadpath');
+    
+    const downloadLink = downloadLinkInput.value.trim(); 
+    const downloadPath = downloadPathInput.value.trim();
+    const statuspre = document.getElementById('status');
+    
+    if (statuspre) statuspre.style.display = 'block';
+
+    if (!downloadLink) {
+        alert('Add a download link! 3:<');
+        return;
+    }
+
+    const requestBody = { download_link: downloadLink };
+    if (downloadPath) requestBody.download_path = downloadPath;
+
+    const currentSplit = window.splitManager ? window.splitManager.getActiveSplit() : null;
+    if (currentSplit) {
+        requestBody.split = currentSplit;
+    }
+
+    fetch('/api/add-download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Download started!:', data.gid);
+            downloadLinkInput.value = '';
+            downloadPathInput.value = ''; 
+            
+            if (window.splitManager) {
+                window.splitManager.resetSplit();
+            }
+            
+            if (typeof refreshDashboard === "function") {
+                refreshDashboard(); 
+            }
+        } else {
+            alert('Error: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to send request.'); 
+    });
+}
+
+
 document.getElementById('Downloadlink').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
-
-        const downloadLink = this.value.trim(); 
-        const downloadPath = document.getElementById('Downloadpath').value.trim();
-        const statuspre = document.getElementById('status');
-        if (statuspre) statuspre.style.display = 'block';
-
-        if (!downloadLink) {
-            alert('Add a download link! 3:<');
-            return;
-        }
-
-        const requestBody = { download_link: downloadLink };
-        if (downloadPath) requestBody.download_path = downloadPath;
-
-        const currentSplit = window.splitManager ? window.splitManager.getActiveSplit() : null;
-        if (currentSplit) {
-            requestBody.split = currentSplit;
-        }
-
-        fetch('/api/add-download', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(requestBody) 
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                console.log('Download started!:', data.gid);
-                this.value = ''; 
-                document.getElementById('Downloadpath').value = ''; 
-                //alert('Download started!');
-                if (window.splitManager) {
-                    window.splitManager.resetSplit();
-                }
-                
-                refreshDashboard(); 
-            } else {
-                alert('Error: ' + data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to send request.'); 
-        });
+        submitDownload();
     }
+});
+
+document.getElementById('submit-download').addEventListener('click', function(event) {
+    event.preventDefault(); 
+    submitDownload();
 });
 
 setInterval(refreshDashboard, 2000);
