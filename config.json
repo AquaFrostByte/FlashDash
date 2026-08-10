@@ -1,9 +1,5 @@
 {
     "default_download_path": "/mnt/PS2HDD/Movies",
     "repositories": [
-        "https://a.111477.xyz/",
-        "https://www.axekin.com/games",
-        "https://vimm.net/vault",
-        "https://files.lain.onl/"
     ]
 }
