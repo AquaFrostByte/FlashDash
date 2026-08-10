@@ -49,8 +49,6 @@ Then enable rpc.
 aria2c --enable-rpc --rpc-listen-all=true -D
 ```
 
-Then u can just run the setup.sh install script.
-
 ### Setting up the .env
 
 I cant push my own .env file because I secured my aria server with a Password and u should too! 
@@ -66,6 +64,16 @@ ARIA2_RPC_PORT=6800
 ```
 
 Technicly u only need to chnage the password but if u use a diffrent server then the one Flash dash is running on u can also change that.
+
+Then u have to set up the venv
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Then u can just run the setup.sh install script.
 
 ## Settings
 
