@@ -38,42 +38,70 @@ Demo Video
 
 https://github.com/user-attachments/assets/e2e175fc-5c71-4cd5-98d0-c6ce6f8408a9
 
-## Installation
+# Installation Guide
 
-### Aria as a downlaod engin
+## 1. Prerequisites
 
-Download aria2c via ur package manager. 
-Then enable rpc.
+Also u need Python ofc ;3
+
+Install `aria2` using your system's package manager:
+
+```bash
+# Ubuntu / Debian
+sudo apt update && sudo apt install aria2
+```
+
+Start the `aria2` RPC daemon in the background:
 
 ```bash
 aria2c --enable-rpc --rpc-listen-all=true -D
 ```
 
-### Setting up the .env
+---
 
-I cant push my own .env file because I secured my aria server with a Password and u should too! 
+## 2. Project Setup
 
-so the .env should enclude the following 
+### Step 1: Clone the Repository
+Clone the repository and enter the project directory:
 
-Create a .env in the project folder!
+```bash
+git clone https://github.com/AquaFrostByte/FlashDash.git
+cd FlashDash
+```
 
-```text
-ARIA2_RPC_SECRET=UrPassword
+### Step 2: Configure Environment Variables
+Create a `.env` file in the project root:
+
+```bash
+nano .env
+```
+
+Add the following environment variables (be sure to secure your server by setting a strong password):
+
+```env
+ARIA2_RPC_SECRET=YourSecurePassword
 ARIA2_RPC_HOST=http://localhost
 ARIA2_RPC_PORT=6800
 ```
 
-Technicly u only need to chnage the password but if u use a diffrent server then the one Flash dash is running on u can also change that.
+> **Note:** You only need to update `ARIA2_RPC_SECRET` by default. If your `aria2` server runs on a separate machine from Flash Dash, update `ARIA2_RPC_HOST` and `ARIA2_RPC_PORT` to match your server configuration.
 
-Then u have to set up the venv
+### Step 3: Set Up the Python Virtual Environment
+Create, activate, and install dependencies into a Python virtual environment:
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Then u can just run the setup.sh install script.
+### Step 4: Run the Setup Script
+Make `setup.sh` executable and run it:
+
+```bash
+chmod +x setup.sh
+./setup.sh
+```
 
 ## Settings
 
