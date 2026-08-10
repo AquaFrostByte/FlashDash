@@ -2,3 +2,5 @@ Flask==3.0.3
 aria2p==0.11.2
 python-dotenv==1.0.1
 requests==2.31.0
+gunicorn==22.0.0
+setuptools<80.0.0
