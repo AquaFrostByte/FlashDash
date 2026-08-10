@@ -22,7 +22,7 @@ Now i want something where i can select my destination past my link and it downl
 
 The backend will be flask again like always first because its easyer to manage files via the OS libart but allso becasue its just whit what i am commfy with and i dont want bigg bugs in a software that has file acces!
 
-Its manly used or expected to be hosted on Linux. In my case Debian 15. It should work with other distros 2 but i wont promiss anything.
+Its manly used or expected to be hosted on Linux. In my case Debian 13. It should work with other distros 2 but i wont promiss anything.
 
 Alot of material that was i had before is made by me already for a nother project.
 this includes the background that is hard to see. I can recommend using because its pretty light on recourses and looks good atleast i think that :3
@@ -38,11 +38,15 @@ Then enable rpc.
 aria2c --enable-rpc --rpc-listen-all=true -D
 ```
 
+Then u can just run the setup.sh install script.
+
 ### Setting up the .env
 
 I cant push my own .env file because I secured my aria server with a Password and u should too! 
 
 so the .env should enclude the following 
+
+Create a .env in the project folder!
 
 ```text
 ARIA2_RPC_SECRET=UrPassword
@@ -56,7 +60,3 @@ Technicly u only need to chnage the password but if u use a diffrent server then
 
 Changing the default download Dir has to be saved!
 For the rest a reload is enought.
-
-## Bugs
-
-A know bug i dont know how or where i have to fix is that in the "white mode" The background stayes black even tho is set the --color-bg variabke to white.
