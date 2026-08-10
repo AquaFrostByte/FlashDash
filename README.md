@@ -10,7 +10,9 @@ So a download manager just for ur Server? Something like aria?
 Well yes kinda...
 But also it can do much more first
 - FlashDash has an real UI and isnt CLI only
-- U can directly add repositorys to download from and browse (HTTP, FTP)
+- It uses Aria2c as a backend so u can use diffrent Protocoles. (HTTP, FTP)
+- U can slplit downloads
+- Pausing and Resuming of all downloads or signle downloads is possible
 - Filtering throw downloadable files is way easyer
 - Way more beginner friendly
 
@@ -26,6 +28,15 @@ Its manly used or expected to be hosted on Linux. In my case Debian 13. It shoul
 
 Alot of material that was i had before is made by me already for a nother project.
 this includes the background that is hard to see. I can recommend using because its pretty light on recourses and looks good atleast i think that :3
+
+## Screenshots and Media
+
+<img width="797" height="813" alt="image" src="https://github.com/user-attachments/assets/1ebb8d9e-0e65-44a4-911e-4a51b207b6b3" />
+<img width="797" height="813" alt="image" src="https://github.com/user-attachments/assets/422fa7a2-2587-428e-8638-496c2fb29309" />
+
+Demo Video
+
+https://github.com/user-attachments/assets/e2e175fc-5c71-4cd5-98d0-c6ce6f8408a9
 
 ## Installation
 
