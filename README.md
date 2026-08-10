@@ -1,33 +1,32 @@
 # FlashDash
+First of all, I don't condone piracy, and this program should not be used for piracy!
+Where you get the download resources from is not my problem, and I won't add any resources on where to get the download repositories from!
 
-First of all i dont condone piracy and this program shound not be used for piracy!!
-Where u get the download resources from is not my problem and i want add any resources where to get the downlaod repositris from!
+## What is FlashDash?
+Flash Dash is a way to easily download and manage those downloads on a remote server!
+So a download manager just for your server? Something like Aria?
+Well, yes, kind of...
+But also it can do much more. First:
 
-## What is flash dash? 
+* FlashDash has a real UI and isn't CLI-only.
+* It uses Aria2c as a backend, so you can use different protocols (HTTP, FTP).
+* You can split downloads.
+* Pausing and resuming of all downloads or single downloads is possible.
+* Filtering through downloadable files is way easier.
+* It is way more beginner-friendly.
 
-Flash dash is a way to easly download and manage thos downloads on a remote server!
-So a download manager just for ur Server? Something like aria? 
-Well yes kinda...
-But also it can do much more first
-- FlashDash has an real UI and isnt CLI only
-- It uses Aria2c as a backend so u can use diffrent Protocoles. (HTTP, FTP)
-- U can slplit downloads
-- Pausing and Resuming of all downloads or signle downloads is possible
-- Filtering throw downloadable files is way easyer
-- Way more beginner friendly
+To show where I come from:
+At the start, I used Wget, which is fine but not a real solution.
+Then I switched to Aria, which is better, but not user-friendly, and I have to copy all the files to their right destinations after the download, which doesn't make it really automatic!
 
-To show of where i come from.
-At the start i used Wget which is fine but not a real solution.
-Then i switch to aria which is better but not user friendly and i have to coppy all the files to there right destinations after the downlaod which dosent make it really automatic!
+Now I want something where I can select my destination, paste my link, and it downloads.
 
-Now i want something where i can select my destination past my link and it downlaods.
+The backend will be Flask again like always, first because it's easier to manage files via the OS library, but also because it's just what I am comfy with, and I don't want big bugs in software that has file access!
 
-The backend will be flask again like always first because its easyer to manage files via the OS libart but allso becasue its just whit what i am commfy with and i dont want bigg bugs in a software that has file acces!
+It's mainly used or expected to be hosted on Linux. In my case, Debian 13. It should work with other distros too, but I won't promise anything.
 
-Its manly used or expected to be hosted on Linux. In my case Debian 13. It should work with other distros 2 but i wont promiss anything.
-
-Alot of material that was i had before is made by me already for a nother project.
-this includes the background that is hard to see. I can recommend using because its pretty light on recourses and looks good atleast i think that :3
+A lot of the material that I had before is made by me already for another project.
+This includes the background that is hard to see. I can recommend using it because it's pretty light on resources and looks good, at least I think that :3
 
 ## Screenshots and Media
 
