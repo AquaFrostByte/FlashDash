@@ -39,9 +39,31 @@ https://github.com/user-attachments/assets/e2e175fc-5c71-4cd5-98d0-c6ce6f8408a9
 
 # Installation Guide
 
-## 1. Prerequisites
+## 1. Automated Installation (Recommended)
 
-Also u need Python ofc ;3
+You can use the automated `install.sh` script to handle dependencies, cloning, configuring the virtual environment, and setting up a systemd background service.
+
+You just need these programs installed first:
+```text
+python3
+aria2c
+git
+```
+
+To install, simply grab the script and run it:
+```bash
+# If you placed install.sh in your repo root or releases
+chmod +x install.sh
+./install.sh
+```
+
+---
+
+## 2. Manual Installation
+
+### Step 1: Prerequisites
+
+Also you need Python ofc ;3
 
 Install `aria2` using your system's package manager:
 
@@ -56,11 +78,7 @@ Start the `aria2` RPC daemon in the background:
 aria2c --enable-rpc --rpc-listen-all=true -D
 ```
 
----
-
-## 2. Project Setup
-
-### Step 1: Clone the Repository
+### Step 2: Clone the Repository
 Clone the repository and enter the project directory:
 
 ```bash
@@ -68,7 +86,7 @@ git clone https://github.com/AquaFrostByte/FlashDash.git
 cd FlashDash
 ```
 
-### Step 2: Configure Environment Variables
+### Step 3: Configure Environment Variables
 Create a `.env` file in the project root:
 
 ```bash
@@ -85,7 +103,7 @@ ARIA2_RPC_PORT=6800
 
 > **Note:** You only need to update `ARIA2_RPC_SECRET` by default. If your `aria2` server runs on a separate machine from Flash Dash, update `ARIA2_RPC_HOST` and `ARIA2_RPC_PORT` to match your server configuration.
 
-### Step 3: Set Up the Python Virtual Environment
+### Step 4: Set Up the Python Virtual Environment
 Create, activate, and install dependencies into a Python virtual environment:
 
 ```bash
@@ -94,7 +112,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Step 4: Run the Setup Script
+### Step 5: Run the Setup Script
 Make `setup.sh` executable and run it:
 
 ```bash
@@ -104,5 +122,5 @@ chmod +x setup.sh
 
 ## Settings
 
-Changing the default download Dir has to be saved!
-For the rest a reload is enought.
+Changing the default download directory has to be saved!
+For the rest, a reload is enough.
