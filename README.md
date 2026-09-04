@@ -39,6 +39,8 @@ https://github.com/user-attachments/assets/e2e175fc-5c71-4cd5-98d0-c6ce6f8408a9
 
 # Installation Guide
 
+Quick Note! Not setting a download dir when there is also not one set in the settings leads to the file being downloaded in the Project folder!
+
 ## 1. Automated Installation (Recommended)
 
 You can use the automated `install.sh` script to handle dependencies, cloning, configuring the virtual environment, and setting up a systemd background service.
@@ -124,3 +126,7 @@ chmod +x setup.sh
 
 Changing the default download directory has to be saved!
 For the rest, a reload is enough.
+
+### Validation
+
+I have tested the project now on Arch, Debian and Fedora without any issues!
