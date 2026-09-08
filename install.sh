@@ -11,7 +11,8 @@ echo "=========================================="
 # 1. Check for required system tools
 MISSING_TOOLS=()
 
-if ! command -v python3 &> /dev/null; then
+# Check for python3 AND its venv module (Debian separates them)
+if ! command -v python3 &> /dev/null || ! python3 -c "import venv" &> /dev/null; then
     MISSING_TOOLS+=("python3")
 fi
 
@@ -23,19 +24,66 @@ if ! command -v aria2c &> /dev/null; then
     MISSING_TOOLS+=("aria2c")
 fi
 
-# Exit early if system prerequisites are missing
+# 2. Auto-Install missing dependencies
 if [ ${#MISSING_TOOLS[@]} -ne 0 ]; then
-    echo -e "\n[!] Error: The following required system dependencies are missing:"
+    echo -e "\n[!] The following required system dependencies are missing:"
     for tool in "${MISSING_TOOLS[@]}"; do
         echo "    - $tool"
     done
-    echo -e "\nPlease install them via your system's package manager and run this script again.\n"
-    exit 1
+    echo -e "\n[+] Attempting to install them automatically (you may be prompted for your sudo password)..."
+
+    # Map commands to correct package names based on the package manager
+    PACKAGES_TO_INSTALL=()
+    for tool in "${MISSING_TOOLS[@]}"; do
+        if [ "$tool" == "python3" ]; then
+            if command -v apt &> /dev/null || command -v apt-get &> /dev/null; then
+                PACKAGES_TO_INSTALL+=("python3" "python3-venv")
+            elif command -v pacman &> /dev/null; then
+                PACKAGES_TO_INSTALL+=("python")
+            else
+                PACKAGES_TO_INSTALL+=("python3")
+            fi
+        elif [ "$tool" == "aria2c" ]; then
+            PACKAGES_TO_INSTALL+=("aria2")
+        else
+            PACKAGES_TO_INSTALL+=("$tool")
+        fi
+    done
+
+    # Detect package manager and install
+    if command -v apt &> /dev/null; then
+        echo "[+] Detected Debian/Ubuntu based system (apt)"
+        sudo apt update
+        sudo apt install -y "${PACKAGES_TO_INSTALL[@]}"
+    elif command -v dnf &> /dev/null; then
+        echo "[+] Detected Fedora/RHEL based system (dnf)"
+        sudo dnf install -y "${PACKAGES_TO_INSTALL[@]}"
+    elif command -v pacman &> /dev/null; then
+        echo "[+] Detected Arch based system (pacman)"
+        sudo pacman -Sy --noconfirm "${PACKAGES_TO_INSTALL[@]}"
+    else
+        echo "[!] Error: Unsupported package manager. Please install the missing tools manually."
+        exit 1
+    fi
+
+    # Verify installation succeeded
+    for tool in "${MISSING_TOOLS[@]}"; do
+        if ! command -v "$tool" &> /dev/null; then
+            if [[ "$tool" == "python3" ]] && ! python3 -c "import venv" &> /dev/null; then
+                echo "[!] Error: python venv module still missing."
+                exit 1
+            elif [[ "$tool" != "python3" ]]; then
+                echo "[!] Error: Failed to install $tool. Please check your system and try again."
+                exit 1
+            fi
+        fi
+    done
+    echo "[✓] Missing dependencies installed successfully."
+else
+    echo "[✓] System check passed (python3, git, and aria2c found)."
 fi
 
-echo "[✓] System check passed (python3, git, and aria2c found)."
-
-# 2. Clone repository if not already present
+# 3. Clone repository if not already present
 if [ -d "$DIR_NAME" ]; then
     echo "[+] Directory '$DIR_NAME' already exists. Navigating inside..."
     cd "$DIR_NAME" || exit 1
@@ -45,7 +93,7 @@ else
     cd "$DIR_NAME" || exit 1
 fi
 
-# 3. Create Python virtual environment
+# 4. Create Python virtual environment
 if [ ! -d "venv" ]; then
     echo "[+] Creating virtual environment..."
     python3 -m venv venv
@@ -53,7 +101,7 @@ else
     echo "[✓] Virtual environment already exists."
 fi
 
-# 4. Activate venv & install Python dependencies
+# 5. Activate venv & install Python dependencies
 echo "[+] Activating virtual environment and installing packages..."
 source venv/bin/activate
 pip install --upgrade pip --quiet
@@ -66,7 +114,7 @@ fi
 # Ensure gunicorn is installed for the systemd service
 pip install gunicorn --quiet
 
-# 5. Start aria2c daemon in background (if not already running)
+# 6. Start aria2c daemon in background (if not already running)
 echo "[+] Checking aria2c RPC daemon status..."
 if pgrep -x "aria2c" > /dev/null; then
     echo "[✓] aria2c daemon is already running."
@@ -76,7 +124,7 @@ else
     echo "[✓] aria2c daemon launched successfully."
 fi
 
-# 6. Service Installation Prompt
+# 7. Service Installation Prompt
 echo "=========================================="
 read -p "Do you want to install FlashDash as a systemd background service? (y/N) " install_service
 echo "=========================================="
@@ -128,7 +176,7 @@ EOF
     echo "[✓] Done! Your app is now live and accessible externally on port 5333."
 
 else
-    # 7. Fallback to foreground execution
+    # 8. Fallback to foreground execution
     echo "[+] Launching FlashDash in the foreground..."
     python3 app.py
 fi

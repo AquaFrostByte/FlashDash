@@ -41,16 +41,9 @@ https://github.com/user-attachments/assets/e2e175fc-5c71-4cd5-98d0-c6ce6f8408a9
 
 Quick Note! Not setting a download dir when there is also not one set in the settings leads to the file being downloaded in the Project folder!
 
-## 1. Automated Installation (Recommended)
+## 1. Automated Installation 
 
 You can use the automated `install.sh` script to handle dependencies, cloning, configuring the virtual environment, and setting up a systemd background service.
-
-You just need these programs installed first (aria2c may be called aria2):
-```text
-python3
-aria2c
-git
-```
 
 To install, simply grab the script and run it:
 ```bash
@@ -61,7 +54,7 @@ chmod +x install.sh
 
 ---
 
-## 2. Manual Installation
+## 2. Manual Installation (Recommended)
 
 ### Step 1: Prerequisites
 
