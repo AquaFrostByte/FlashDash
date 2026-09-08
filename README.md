@@ -44,6 +44,7 @@ Quick Note! Not setting a download dir when there is also not one set in the set
 ## 1. Automated Installation 
 
 You can use the automated `install.sh` script to handle dependencies, cloning, configuring the virtual environment, and setting up a systemd background service.
+The script is now also downloading programms and running them thats why its fully docummented.
 
 To install, simply grab the script and run it:
 ```bash
