@@ -124,3 +124,4 @@ For the rest, a reload is enough.
 ### Validation
 
 I have tested the project now on Arch, Debian and Fedora without any issues!
+If u still have some please just open up an issue i will fix it.
