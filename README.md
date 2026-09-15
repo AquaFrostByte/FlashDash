@@ -45,6 +45,7 @@ Quick Note! Not setting a download dir when there is also not one set in the set
 
 You can use the automated `install.sh` script to handle dependencies, cloning, configuring the virtual environment, and setting up a systemd background service.
 The script is now also downloading programms and running them thats why its fully docummented.
+It may be that the script needs sudo rights, that comes from it needing to install Programms via the package manager (apt,dnf or pacman).
 
 To install, simply grab the script and run it:
 ```bash
